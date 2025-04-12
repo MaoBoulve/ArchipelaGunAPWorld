@@ -11,19 +11,19 @@ def get_chest_string(number: int) -> str:
     return f"Chest {number + 1} (Any Rarity)"
 
 def has_completed_objectives(multiworld: MultiWorld, options: GungeonLocation, player, state: CollectionState) -> bool:
-    if options.additional_goals.__contains__("Old King"):
+    if options.old_king.value:
         if not state.has("Defeat The Old King", player):
             return False
 
-    if options.additional_goals.__contains__("Resourceful Rat"):
+    if options.resourceful_rat.value:
         if not state.has("Defeat The Resourceful Rat", player):
             return False
         
-    if options.additional_goals.__contains__("Agunim"):
+    if options.agunim.value:
         if not state.has("Defeat Agunim", player):
             return False
         
-    if options.additional_goals.__contains__("Advanced Dragun"):
+    if options.advanced_dragun.value:
         if not state.has("Defeat The Advanced Dragun", player):
             return False
 

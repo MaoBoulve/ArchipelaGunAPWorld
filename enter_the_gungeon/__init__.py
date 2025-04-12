@@ -16,7 +16,7 @@ class GungeonWeb(WebWorld):
         "English",
         "setup_en.md",
         "setup/en",
-        ["KinTheInfinite"]
+        ["MaoBoulve"]
     )]
 
     option_groups = gungeon_option_groups
@@ -24,11 +24,12 @@ class GungeonWeb(WebWorld):
 
 
 class GungeonWorld(World):
-     
-    """ Enter the Gungeon is a bullet hell dungeon crawler following a band of misfits seeking to 
-     shoot, loot, dodge roll and table-flip their way to personal absolution by reaching the 
-     legendary Gungeon’s ultimate treasure: the gun that can kill the past.
-    """ #Lifted from Store Page
+    # Lifted from Store Page
+    """ Enter the Gungeon is a bullet hell roguelike to get the Gungeon's treasure: the gun that can kill the past.
+
+    The randomizer replaces all chests with APItems location checks. Milestones also send location checks.
+    Received items/traps play a matching effect and spawn by the player.
+    """
 
     game: str = "Enter The Gungeon"
     topology_present = False
@@ -46,13 +47,16 @@ class GungeonWorld(World):
 
     def fill_slot_data(self):
         return {
-            "Goal": self.options.goal.value,
-            "Blobulord Goal": int(self.options.additional_goals.__contains__("Blobulord")),
-            "Old King Goal": int(self.options.additional_goals.__contains__("Old King")),
-            "Resourceful Rat Goal": int(self.options.additional_goals.__contains__("Resourceful Rat")),
-            "Agunim Goal": int(self.options.additional_goals.__contains__("Agunim")),
-            "Advanced Dragun Goal": int(self.options.additional_goals.__contains__("Advanced Dragun")),
+            "Goal": self.options.lich.value,
+            "Dragun Goal": self.options.dragun.value,
+            "Lich Goal": self.options.lich.value,
+            "Blobulord Goal": self.options.blobulord.value,
+            "Old King Goal": self.options.old_king.value,
+            "Resourceful Rat Goal": self.options.resourceful_rat.value,
+            "Agunim Goal": self.options.agunim.value,
+            "Advanced Dragun Goal": self.options.advanced_dragun.value,
             "DeathLink": self.options.death_link.value,
+            "RandomEnemies": self.options.random_enemies.value
         }
 
     def set_rules(self):

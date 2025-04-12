@@ -3,18 +3,61 @@ from dataclasses import dataclass
 from typing import Dict, Any
 from Options import Option, Choice, DeathLink, Range, Toggle, PerGameCommonOptions, OptionGroup, OptionSet
 
-class Goal(Choice):
-    """The main victory condition for your run"""
-    display_name = "Goal"
-    option_high_dragun = 0
-    option_lich = 1
+class DragunGoal(Choice):
+    """Require High Dragun defeat for completion"""
+    display_name = "Dragun Goal"
+    option_required = 1
+    option_optional = 0
+    default = 1
+
+class LichGoal(Choice):
+    """Require Lich Goal defeat for completion"""
+    display_name = "Lich Goal"
+    option_required = 1
+    option_optional = 0
+    default = 1
+
+class Blobulord(Choice):
+    """Require Blobulord defeat for completion"""
+    display_name = "Blobulord Goal"
+    option_required = 1
+    option_optional = 0
+    default = 1
+
+class OldKing(Choice):
+    """Require Old King defeat for completion"""
+    display_name = "Old King Goal"
+    option_required = 1
+    option_optional = 0
+    default = 1
+
+class ResourcefulRat(Choice):
+    """Require Resourceful Rat defeat for completion"""
+    display_name = "Resourceful Rat Goal"
+    option_required = 1
+    option_optional = 0
     default = 0
 
-class AdditionalGoals(OptionSet):
-    """Select additional bosses to be required to complete your run'"""
-    display_name = "Additional Goals"
-    default = {}
-    valid_keys = ["Blobulord", "Old King", "Resourceful Rat", "Agunim", "Advanced Dragun"]
+class Agunim(Choice):
+    """Require Agunim (R&D Dept) Goal defeat for completion"""
+    display_name = "Agunim Goal"
+    option_required = 1
+    option_optional = 0
+    default = 1
+
+class AdvancedDragun(Choice):
+    """Require Advanced Dragun Goal defeat for completion"""
+    display_name = "Lich Goal"
+    option_required = 1
+    option_optional = 0
+    default = 0
+
+class RandomizeEnemies(Choice):
+    """Randomize all basic enemies in the Gungeon."""
+    display_name = "Randomize Enemies"
+    option_random_enemies = 1
+    option_standard_enemies = 0
+    default = 1
 
 class RandomGunTierD(Range):
     """Amount of D tier guns in the item pool"""
@@ -101,6 +144,15 @@ class TrapAmount(Range):
     default = 10
 
 gungeon_option_groups = [
+    OptionGroup("Boss Goals Options" ,[
+        DragunGoal,
+        LichGoal,
+        Blobulord,
+        OldKing,
+        ResourcefulRat,
+        Agunim,
+        AdvancedDragun
+    ]),
     OptionGroup("Item Amount Options", [
         RandomGunTierD,
         RandomGunTierC,
@@ -119,8 +171,13 @@ gungeon_option_groups = [
 
 gungeon_options_presets: Dict[str, Dict[str, Any]] = {
     "All Bosses": {
-        "goal":                  Goal.option_lich,
-        "additional_goals":      AdditionalGoals.valid_keys,
+        "high_dragun": DragunGoal.default,
+        "lich": LichGoal.default,
+        "blobulord": Blobulord.default,
+        "old_king": OldKing.default,
+        "resourceful_rat": ResourcefulRat.default,
+        "agunim": Agunim.default,
+        "advanced_dragun": AdvancedDragun.default,
     },
     "D Tier": {
         "random_gun_tier_d":     RandomGunTierD.range_end,
@@ -148,12 +205,22 @@ gungeon_options_presets: Dict[str, Dict[str, Any]] = {
         "random_item_tier_a":    "random",
         "random_item_tier_s":    "random",
     },
+    "random_enemies":        RandomizeEnemies.option_random_enemies,
 }
 
 @dataclass
 class GungeonOptions(PerGameCommonOptions):
+    dragun: DragunGoal
+    lich: LichGoal
+    blobulord: Blobulord
+    old_king: OldKing
+    resourceful_rat: ResourcefulRat
+    agunim: Agunim
+    advanced_dragun: AdvancedDragun
+
+    random_enemies: RandomizeEnemies
     death_link: DeathLink
-    goal: Goal
+
     pickup_amount: PickupAmount
     random_gun_tier_d: RandomGunTierD
     random_gun_tier_c: RandomGunTierC
@@ -166,4 +233,4 @@ class GungeonOptions(PerGameCommonOptions):
     random_item_tier_b: RandomItemTierB
     random_item_tier_a: RandomItemTierA
     random_item_tier_s: RandomItemTierS
-    additional_goals: AdditionalGoals
+
