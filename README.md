@@ -1,19 +1,31 @@
 # ArchipelaGunAPWorld
-Enter the Gungeon AP World dev: RELOADED
+Revision AP World for Enter the Gungeon. Based on the prior work by KinTheInfinite (https://github.com/KinTheInfinite/Archipelago/releases).
 
-## What does randomization do to this game?
-All chest items replaced with APItem location checks. Milestones for goals like clearing rooms & cash spent send location checks.
+## Required Software
 
-Items received in Gungeon are randomized by rarity.
+- Enter The Gungeon
+  - [Steam Store Page](https://store.steampowered.com/app/311690/Enter_the_Gungeon/)
+  - [Epic Games Store](https://store.epicgames.com/en-US/p/enter-the-gungeon)
+- [ArchipelaGun Mod](link TBD)
 
-## What is the goal of Enter The Gungeon when randomized?
-To defeat The Lich or High Dragun depending on goals set, as well as any additional side bosses you may select.
+## Installation and Game Start Procedures
 
-## Which items can be in another player's world?
-All items including progress items by default.
+1. Install Enter The Gungeon through either Steam or Epic Games Store.
+2. Use Thunderstore to install the Archipelago mod & dependency mods
+   1. ArchipelaGun Mod (LINK TBD)
+   2. Mod the Gungeon v1.8.4 (https://thunderstore.io/c/enter-the-gungeon/p/MtG_API/Mod_the_Gungeon_API/)
+   3. Alexandria v0.4.9 (https://thunderstore.io/c/enter-the-gungeon/p/Alexandria/Alexandria/)
+3. Start The Game Modded
 
-## What does another world's item look like in Enter The Gungeon?
-APItem in chests & messages through client. WIP for in-engine messages.
+# Joining a MultiWorld Game
 
-## When the player receives an item, what happens?
-Synergy 'bloop' will play and items will be dropped on the ground near the player.
+* On run start, the Archipelagun will spawn. Fire to open the mod menu
+ 
+ * Following commands are available:
+ * connect (ip) (port) (slot name) --- [Connect to room. Space separated, without the parenthesis]
+ * retrieve --- [Retrieve items from server, once per run ]
+ * progress --- [Print out goals and current state of game completion]
+ * apspawn --- [Debug spawn command  to spawn the next APItem]
+ 
+ * fullconnect (ip) (port) --- [Workaround connection option for handling player names with spaces & rooms with passwords. Use with 'set'.]
+ * set (option) --- [Replace 'option' with Name or Password. Set parameters for 'fullconnect']
