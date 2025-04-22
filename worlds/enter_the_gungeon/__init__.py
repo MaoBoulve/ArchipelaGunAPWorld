@@ -1,5 +1,5 @@
 from typing import List
-from .Items import item_table, pickup_item_table, trap_item_table, GungeonItem
+from .Items import item_table, pickup_item_table, trap_item_table, GungeonItem, progression_item_table
 from .Locations import location_table, GungeonLocation
 from .Options import GungeonOptions, gungeon_option_groups, gungeon_options_presets
 from .Rules import set_rules
@@ -45,9 +45,9 @@ class GungeonWorld(World):
         create_regions(self.multiworld, self.options, self.player)
         self.place_events()
 
+    """Defines Session.DataStorage.GetSlotData() dict"""
     def fill_slot_data(self):
         return {
-            "Goal": self.options.lich.value,
             "Dragun Goal": self.options.dragun.value,
             "Lich Goal": self.options.lich.value,
             "Blobulord Goal": self.options.blobulord.value,
@@ -66,9 +66,15 @@ class GungeonWorld(World):
 
     def create_item(self, name: str) -> Item:
         return GungeonItem(name, ItemClassification.filler, item_table[name], self.player)
-    
-    def create_item_progression(self, name: str) -> Item:
-        return GungeonItem(name, ItemClassification.progression, item_table[name], self.player)
+
+    def create_progress_item(self, name: str) -> Item:
+        return GungeonItem(name, ItemClassification.progression, progression_item_table[name], self.player)
+
+    def create_useful_item(self, name: str) -> Item:
+        return GungeonItem(name, ItemClassification.useful, item_table[name], self.player)
+
+    def create_trap_item(self, name: str) -> Item:
+        return GungeonItem(name, ItemClassification.trap, item_table[name], self.player)
     
     def create_event(self, name: str) -> GungeonItem:
         return GungeonItem(name, ItemClassification.progression, None, self.player)
@@ -77,6 +83,8 @@ class GungeonWorld(World):
         item_pool: List[GungeonItem] = []
         for name, data in item_table.items():
             quantity = 0
+
+            "TODO: clean this up to a string dict"
             match name:
                 case "Random D Tier Gun":
                     quantity = self.options.random_gun_tier_d.value
@@ -98,23 +106,19 @@ class GungeonWorld(World):
                     quantity = self.options.random_item_tier_a.value
                 case "Random S Tier Item":
                     quantity = self.options.random_item_tier_s.value
-                case "Gnawed Key":
-                    item_pool.append(self.create_item_progression(name))
-                case "Old Crest":
-                    item_pool.append(self.create_item_progression(name))
-                case "Weird Egg":
-                    item_pool.append(self.create_item_progression(name))
-
-            if quantity == 0:
-                continue
-
             item_pool += [self.create_item(name) for i in range(0, quantity)]
 
+        "Progress items"
+        for progression_item_name, itemID in progression_item_table.items():
+            item_pool.append(self.create_progress_item(progression_item_name))
+
+        "Consumables items"
         for i in range(0, self.options.pickup_amount.value):
             item_pool.append(self.create_item(list(pickup_item_table)[i % len(pickup_item_table)]))
 
+        "Traps"
         for i in range(0, self.options.trap_amount.value):
-            item_pool.append(self.create_item(list(trap_item_table)[i % len(trap_item_table)]))
+            item_pool.append(self.create_trap_item(list(trap_item_table)[i % len(trap_item_table)]))
 
         self.multiworld.itempool += item_pool
 

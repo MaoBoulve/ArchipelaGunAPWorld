@@ -22,7 +22,8 @@ def get_total_locations() -> int:
     total_locations += TrapAmount.range_end
     return total_locations
 
-location_table = { }
+
+location_table = {}
 
 # Fill location table with chests until we reach the maximum possible item amount
 for i in range(0, get_total_locations()):

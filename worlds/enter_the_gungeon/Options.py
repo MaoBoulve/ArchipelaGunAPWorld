@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from typing import Dict, Any
 from Options import Option, Choice, DeathLink, Range, Toggle, PerGameCommonOptions, OptionGroup, OptionSet
 
+# https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/options%20api.md
+
 class DragunGoal(Choice):
     """Require High Dragun defeat for completion"""
     display_name = "Dragun Goal"
@@ -58,6 +60,9 @@ class RandomizeEnemies(Choice):
     option_random_enemies = 1
     option_standard_enemies = 0
     default = 1
+
+
+"Default options defines 50 items, then 3 progression items"
 
 class RandomGunTierD(Range):
     """Amount of D tier guns in the item pool"""
@@ -143,8 +148,9 @@ class TrapAmount(Range):
     range_end = 50
     default = 10
 
+
 gungeon_option_groups = [
-    OptionGroup("Boss Goals Options" ,[
+    OptionGroup("Boss Goals Options", [
         DragunGoal,
         LichGoal,
         Blobulord,
