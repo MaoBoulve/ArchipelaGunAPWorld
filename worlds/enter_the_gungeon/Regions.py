@@ -1,7 +1,7 @@
 import typing
 from BaseClasses import MultiWorld, Region, Entrance, Location
 from .Locations import GungeonLocation, location_table, event_location_table
-from .Items import item_table
+from .Items import item_table, progression_item_table
 from .Options import GungeonOptions
 
 def get_total_chests(options: GungeonOptions):
@@ -16,7 +16,7 @@ def get_total_chests(options: GungeonOptions):
     total_locations += options.random_item_tier_a.value
     total_locations += options.random_item_tier_s.value
     # Gnawed Key, Old Crest, Weird Egg
-    total_locations += 3
+    total_locations += len(progression_item_table)
     total_locations += options.pickup_amount.value
     total_locations += options.trap_amount.value
     return total_locations
@@ -26,7 +26,7 @@ def create_regions(world: MultiWorld, options: GungeonOptions, player: int):
 
     # Fill in locations equal to our item amount
     for i in range(0, get_total_chests(options)):
-        loc_name = f"Chest {i + 1} (Any Rarity)"
+        loc_name = f"AP Item Chest Pickup {i + 1}"
         region.locations.append(GungeonLocation(player, loc_name, location_table[loc_name], region))
 
     # Add event locations
