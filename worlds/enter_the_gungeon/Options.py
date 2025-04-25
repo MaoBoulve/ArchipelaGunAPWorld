@@ -12,6 +12,15 @@ class DragunGoal(Choice):
     option_optional = 0
     default = 1
 
+class KillThePastGoal(Choice):
+    """Require Past Kills for game completion. 'Standard' is base 4 characters. 'All' adds Robot & Bullet
+    Mod provides way to use all game characters"""
+    display_name = "Kill The Past Goal"
+    option_optional = 0
+    option_standard = 1
+    option_all_pasts = 2
+    default = 1
+
 class LichGoal(Choice):
     """Require Lich Goal defeat for completion"""
     display_name = "Lich Goal"
@@ -19,39 +28,27 @@ class LichGoal(Choice):
     option_optional = 0
     default = 1
 
-class Blobulord(Choice):
-    """Require Blobulord defeat for completion"""
-    display_name = "Blobulord Goal"
-    option_required = 1
-    option_optional = 0
-    default = 1
-
-class OldKing(Choice):
-    """Require Old King defeat for completion"""
-    display_name = "Old King Goal"
-    option_required = 1
-    option_optional = 0
-    default = 1
-
-class ResourcefulRat(Choice):
-    """Require Resourceful Rat defeat for completion"""
-    display_name = "Resourceful Rat Goal"
+class BaseSecretChamberBosses(Choice):
+    """Require Blobulord & Old King for completion"""
+    display_name = "Base Secret Chamber Boss Goal"
     option_required = 1
     option_optional = 0
     default = 0
 
-class Agunim(Choice):
-    """Require Agunim (R&D Dept) Goal defeat for completion"""
-    display_name = "Agunim Goal"
+class AdvancedGungeonDragunsBosses(Choice):
+    """Require bosses from the AG&D Update (Resourceful Rat, Advanced Dragun) for completion.
+    Do not need to beat Rat at Punch Out"""
+    display_name = "Advanced Gungeon & Draguns Bosses"
     option_required = 1
     option_optional = 0
-    default = 1
+    default = 0
 
-class AdvancedDragun(Choice):
-    """Require Advanced Dragun Goal defeat for completion"""
-    display_name = "Lich Goal"
-    option_required = 1
-    option_optional = 0
+class FarewellToArmsBosses(Choice):
+    """Require bosses from the Farewell To Arms Update (Cam Clarke AS Agunim) for completion
+    [Paradox Lich currently WIP]"""
+    display_name = "Farewell To Arms Bosses"
+    option_required = 0
+    option_optional = 1
     default = 0
 
 class RandomizeEnemies(Choice):
@@ -61,182 +58,127 @@ class RandomizeEnemies(Choice):
     option_standard_enemies = 0
     default = 1
 
+class ParadoxMode(Choice):
+    """Start all runs as Paradox. Other playable characters are Items in randomizer"""
+    display_name = "Paradox Mode"
+    option_enabled = 1
+    options_disabled = 0
+    default = 1
 
-"Default options defines 50 items, then 3 progression items"
+class GunItems(Choice):
+    """Amount of Guns in your item pool"""
+    display_name = "Gun Pool Items"
+    option_short = 0
+    option_standard = 1
+    option_marathon = 2
+    default = 1
 
-class RandomGunTierD(Range):
-    """Amount of D tier guns in the item pool"""
-    display_name = "D Tier Guns"
-    range_start = 0
-    range_end = 20
-    default = 5
+class PassiveItems(Choice):
+    """Amount of Passive & Active items in your item pool"""
+    display_name = "Passive & Active Pool Items"
+    option_short = 0
+    option_standard = 1
+    option_marathon = 2
+    default = 1
 
-class RandomGunTierC(Range):
-    """Amount of C tier guns in the item pool"""
-    display_name = "C Tier Guns"
-    range_start = 0
-    range_end = 20
-    default = 3
+class ConsumableItems(Choice):
+    """Amount of Consumable items in your item pool"""
+    display_name = "Consumable Items"
+    option_short = 0
+    option_standard = 1
+    option_marathon = 2
+    default = 0
 
-class RandomGunTierB(Range):
-    """Amount of B tier guns in the item pool"""
-    display_name = "B Tier Guns"
-    range_start = 0
-    range_end = 20
-    default = 3
+class TrapItems(Choice):
+    """Amount of Traps in your item pool"""
+    option_short = 0
+    option_standard = 1
+    option_marathon = 2
+    default = 1
 
-class RandomGunTierA(Range):
-    """Amount of A tier guns in the item pool"""
-    display_name = "A Tier Guns"
-    range_start = 0
-    range_end = 20
-    default = 2
+class AchievementLocationChecks(Choice):
+    """Location checks for accomplishing tasks in Enter the Gungeon"""
+    option_short = 0
+    option_standard = 1
+    option_marathon = 2
+    default = 1
 
-class RandomGunTierS(Range):
-    """Amount of S tier guns in the item pool"""
-    display_name = "S Tier Guns"
-    range_start = 0
-    range_end = 20
-    default = 2
-
-class RandomItemTierD(Range):
-    """Amount of D tier items in the item pool"""
-    display_name = "D Tier Items"
-    range_start = 0
-    range_end = 20
-    default = 5
-
-class RandomItemTierC(Range):
-    """Amount of C tier items in the item pool"""
-    display_name = "C Tier Items"
-    range_start = 0
-    range_end = 20
-    default = 3
-
-class RandomItemTierB(Range):
-    """Amount of B tier items in the item pool"""
-    display_name = "B Tier Items"
-    range_start = 0
-    range_end = 20
-    default = 3
-
-class RandomItemTierA(Range):
-    """Amount of A tier items in the item pool"""
-    display_name = "A Tier Items"
-    range_start = 0
-    range_end = 20
-    default = 2
-
-class RandomItemTierS(Range):
-    """Amount of S tier items in the item pool"""
-    display_name = "S Tier Items"
-    range_start = 0
-    range_end = 20
-    default = 2
-
-class PickupAmount(Range):
-    """Amount of item pickups in the item pool"""
-    display_name = "Pickup Amount"
-    range_start = 0
-    range_end = 50
-    default = 10
-
-class TrapAmount(Range):
-    """Amount of traps in the item pool"""
-    display_name = "Trap Amount"
-    range_start = 0
-    range_end = 50
-    default = 10
+class APItemLocationChecks(Choice):
+    """Location checks from APItem replacing item in chests, shops, etc."""
+    option_short = 0
+    option_standard = 1
+    option_marathon = 2
+    default = 1
 
 
 gungeon_option_groups = [
     OptionGroup("Boss Goals Options", [
         DragunGoal,
+        KillThePastGoal,
         LichGoal,
-        Blobulord,
-        OldKing,
-        ResourcefulRat,
-        Agunim,
-        AdvancedDragun
+        BaseSecretChamberBosses,
+        AdvancedGungeonDragunsBosses,
+        FarewellToArmsBosses
     ]),
-    OptionGroup("Item Amount Options", [
-        RandomGunTierD,
-        RandomGunTierC,
-        RandomGunTierB,
-        RandomGunTierA,
-        RandomGunTierS,
-        RandomItemTierD,
-        RandomItemTierC,
-        RandomItemTierB,
-        RandomItemTierA,
-        RandomItemTierS,
-        PickupAmount,
-        TrapAmount,
-    ])
+    OptionGroup("Randomizer Options", [
+       DeathLink,
+       ParadoxMode,
+       RandomizeEnemies
+    ]),
+    OptionGroup("Gungeon Item Pool Options", [
+       GunItems,
+       PassiveItems,
+       TrapItems
+    ]),
+
+    OptionGroup("Location Check Options", [
+       APItemLocationChecks,
+       AchievementLocationChecks
+    ]),
+
 ]
 
 gungeon_options_presets: Dict[str, Dict[str, Any]] = {
-    "All Bosses": {
-        "high_dragun": DragunGoal.default,
-        "lich": LichGoal.default,
-        "blobulord": Blobulord.default,
-        "old_king": OldKing.default,
-        "resourceful_rat": ResourcefulRat.default,
-        "agunim": Agunim.default,
-        "advanced_dragun": AdvancedDragun.default,
-    },
-    "D Tier": {
-        "random_gun_tier_d":     RandomGunTierD.range_end,
-        "random_gun_tier_c":     0,
-        "random_gun_tier_b":     0,
-        "random_gun_tier_a":     0,
-        "random_gun_tier_s":     0,
-        "random_item_tier_d":    RandomItemTierD.range_end,
-        "random_item_tier_c":    0,
-        "random_item_tier_b":    0,
-        "random_item_tier_a":    0,
-        "random_item_tier_s":    0,
-    },
-    "Random": {
-        "pickup_amount":         "random",
-        "random_gun_tier_d":     "random",
-        "random_gun_tier_c":     "random",
-        "random_gun_tier_b":     "random",
-        "random_gun_tier_a":     "random",
-        "random_gun_tier_s":     "random",
-        "trap_amount":           "random",
-        "random_item_tier_d":    "random",
-        "random_item_tier_c":    "random",
-        "random_item_tier_b":    "random",
-        "random_item_tier_a":    "random",
-        "random_item_tier_s":    "random",
-    },
-    "random_enemies":        RandomizeEnemies.option_random_enemies,
+    "dragun": DragunGoal.default,
+    "past_kills": KillThePastGoal.default,
+    "lich": LichGoal.default,
+    "base_secret_chamber": BaseSecretChamberBosses.default,
+    "advanced_gungeon": AdvancedGungeonDragunsBosses.default,
+    "farewell_arms": FarewellToArmsBosses.default,
+
+    "paradox_mode": ParadoxMode.default,
+    "random_enemies": RandomizeEnemies.default,
+    "death_link": DeathLink.default,
+
+    "guns": GunItems.default,
+    "passives": PassiveItems.default,
+    "traps": TrapItems.default,
+    "consumable": ConsumableItems.default,
+
+    "achievement_locations": AchievementLocationChecks.default,
+    "ap_item_locations": APItemLocationChecks.default
 }
 
 @dataclass
 class GungeonOptions(PerGameCommonOptions):
     dragun: DragunGoal
+    past_kills: KillThePastGoal
     lich: LichGoal
-    blobulord: Blobulord
-    old_king: OldKing
-    resourceful_rat: ResourcefulRat
-    agunim: Agunim
-    advanced_dragun: AdvancedDragun
+    base_secret_chamber: BaseSecretChamberBosses
+    advanced_gungeon: AdvancedGungeonDragunsBosses
+    farewell_arms: FarewellToArmsBosses
 
+    paradox_mode: ParadoxMode
     random_enemies: RandomizeEnemies
     death_link: DeathLink
 
-    pickup_amount: PickupAmount
-    random_gun_tier_d: RandomGunTierD
-    random_gun_tier_c: RandomGunTierC
-    random_gun_tier_b: RandomGunTierB
-    random_gun_tier_a: RandomGunTierA
-    random_gun_tier_s: RandomGunTierS
-    trap_amount: TrapAmount
-    random_item_tier_d: RandomItemTierD
-    random_item_tier_c: RandomItemTierC
-    random_item_tier_b: RandomItemTierB
-    random_item_tier_a: RandomItemTierA
-    random_item_tier_s: RandomItemTierS
+    guns: GunItems
+    passives: PassiveItems
+    traps: TrapItems
+    consumable: ConsumableItems
+
+    achievement_locations: AchievementLocationChecks
+    ap_item_locations: APItemLocationChecks
+
+
 
