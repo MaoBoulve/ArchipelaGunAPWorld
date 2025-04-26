@@ -33,7 +33,7 @@ class BaseSecretChamberBosses(Choice):
     display_name = "Base Secret Chamber Boss Goal"
     option_required = 1
     option_optional = 0
-    default = 0
+    default = 1
 
 class AdvancedGungeonDragunsBosses(Choice):
     """Require bosses from the AG&D Update (Resourceful Rat, Advanced Dragun) for completion.
@@ -62,7 +62,7 @@ class ParadoxMode(Choice):
     """Start all runs as Paradox. Other playable characters are Items in randomizer"""
     display_name = "Paradox Mode"
     option_enabled = 1
-    options_disabled = 0
+    option_disabled = 0
     default = 1
 
 class GunItems(Choice):
@@ -128,6 +128,7 @@ gungeon_option_groups = [
     OptionGroup("Gungeon Item Pool Options", [
        GunItems,
        PassiveItems,
+       ConsumableItems,
        TrapItems
     ]),
 

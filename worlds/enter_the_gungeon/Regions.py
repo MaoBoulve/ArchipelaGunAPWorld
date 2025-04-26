@@ -59,7 +59,9 @@ def create_regions(world: MultiWorld, options: GungeonOptions, player: int):
     achievement_locations_option = options.achievement_locations.value
     achievement_count_list = LocationGeneration.get_location_count_list(achievement_locations_option)
 
-    for name, data in LocationGeneration.location_id:
+    name_list = LocationGeneration.location_id.keys()
+
+    for name in name_list:
         if name != "Chest AP Item" or name != "Shop AP Item":
             for i in range(0, achievement_count_list[name]):
                 loc_name = f"{name} {i + 1}"

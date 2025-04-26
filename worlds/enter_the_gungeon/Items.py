@@ -147,12 +147,12 @@ progression_item_table = {
 }
 
 paradox_character_unlock_table = {
-    "Marine - Paradox": 8754400,
-    "Convict - Paradox": 8754401,
-    "Pilot - Paradox": 8754402,
-    "Hunter - Paradox": 8754403,
-    "Robot - Paradox": 8754404,
-    "Bullet - Paradox": 8754405,
+    "Marine Paradox": 8754400,
+    "Convict Paradox": 8754401,
+    "Pilot Paradox": 8754402,
+    "Hunter Paradox": 8754403,
+    "Robot Paradox": 8754404,
+    "Bullet Paradox": 8754405,
 }
 
 item_table.update(gun_item_table)

@@ -1,7 +1,7 @@
 from typing import List
 from .Items import item_table, pickup_item_table, trap_item_table, GungeonItem, progression_item_table, fill_item_table
 from .Items import gun_item_table, passive_item_table, paradox_character_unlock_table
-from .Locations import location_table, GungeonLocation
+from .Locations import location_table, GungeonLocation, LocationGeneration
 from .Options import GungeonOptions, gungeon_option_groups, gungeon_options_presets
 from .Rules import set_rules
 from .Regions import create_regions, get_gungeon_items_count, get_user_requested_locations_count
@@ -91,7 +91,7 @@ class GungeonWorld(World):
         return GungeonItem(name, ItemClassification.filler, item_table[name], self.player)
 
     def create_progress_item(self, name: str) -> Item:
-        return GungeonItem(name, ItemClassification.progression, progression_item_table[name], self.player)
+        return GungeonItem(name, ItemClassification.progression, item_table[name], self.player)
 
     def create_useful_item(self, name: str) -> Item:
         return GungeonItem(name, ItemClassification.useful, item_table[name], self.player)
@@ -126,7 +126,9 @@ class GungeonWorld(World):
 
         "Paradox Mode"
         if self.options.paradox_mode.value == 1:
-            for character_name, itemID in paradox_character_unlock_table():
+            name_list = paradox_character_unlock_table.keys()
+
+            for character_name in name_list:
                 item_pool.append(self.create_progress_item(character_name))
 
         item_count = get_gungeon_items_count(self.options)
@@ -150,7 +152,9 @@ class GungeonWorld(World):
         return item_pool
 
     def create_item_pool(self, item_pool, amount_case=0, item_table_list=gun_item_table):
-        for name, data in item_table_list:
+        item_name_list = item_table_list.keys()
+
+        for name in item_name_list:
             quantity = 0
 
             match amount_case:

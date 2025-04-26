@@ -141,9 +141,10 @@ def fill_ap_item_locations_to_max():
     return
 
 def fill_achievement_locations():
-    for name, data in LocationGeneration.location_id:
-        if name != "Chest AP Item" or name != "Shop AP Item":
+    name_list = LocationGeneration.location_id.keys()
 
+    for name in name_list:
+        if name != "Chest AP Item" or name != "Shop AP Item":
             for i in range(0, LocationGeneration.marathon_location_count[name]):
                 location_table.update({f"{name} {i + 1}": LocationGeneration.location_id[name] + i})
 
