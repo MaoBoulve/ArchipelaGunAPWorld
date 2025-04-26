@@ -25,20 +25,16 @@ def get_user_requested_locations_count(options: GungeonOptions):
 
     return loc_count
 
+
 def fill_add_locations(amount: 10, item_case: 1):
 
-    chest_fill = int(amount/2)
-    shop_fill = amount - chest_fill
+    chest_fill = amount
 
     last_chest, last_shop = LocationGeneration.get_ap_item_sub_count(case_number=item_case)
     loc_name_list = []
 
     for i in range(0, chest_fill):
         loc_name = f"Chest AP Item {i + 1 + last_chest}"
-        loc_name_list.append(loc_name)
-
-    for i in range(0, shop_fill):
-        loc_name = f"Shop AP Item {i + 1 + last_chest}"
         loc_name_list.append(loc_name)
 
     return loc_name_list

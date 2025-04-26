@@ -65,8 +65,22 @@ class GungeonWorld(World):
             "RandomEnemies": self.options.random_enemies.value,
 
             "AchievementChecks": self.options.achievement_locations.value,
-            "APItemChecks": self.options.ap_item_locations.value
+            "APItemChecks": self.options.ap_item_locations.value,
+            "ExtraLocations": self.count_extra_locations()
         }
+
+    def count_extra_locations(self):
+
+        item_count = get_gungeon_items_count(self.options)
+        location_count = get_user_requested_locations_count(self.options)
+
+        extra_locations = item_count - location_count
+
+        if extra_locations > 0:
+            return extra_locations
+
+        else:
+            return 0
 
     def set_rules(self):
         self.area_connections = {}
