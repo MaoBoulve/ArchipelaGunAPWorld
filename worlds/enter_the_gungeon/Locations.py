@@ -23,8 +23,7 @@ class LocationGeneration:
         "Abbey Clears": 8755840,
         "Resourceful Rat Lair Clears": 8755860,
         "R&D Department Clears": 8755880,
-        "Chest AP Item": 8755000,
-        "Shop AP Item": 8755100
+        "Gungeon AP Item": 8755000,
     }
 
     short_location_count = {
@@ -42,8 +41,7 @@ class LocationGeneration:
         "Abbey Clears": 1,
         "Resourceful Rat Lair Clears": 0,
         "R&D Department Clears": 0,
-        "Chest AP Item": 11,
-        "Shop AP Item": 5
+        "Gungeon AP Item": 16,
     }
 
     standard_location_count = {
@@ -61,8 +59,7 @@ class LocationGeneration:
         "Abbey Clears": 2,
         "Resourceful Rat Lair Clears": 1,
         "R&D Department Clears": 1,
-        "Chest AP Item": 16,
-        "Shop AP Item": 9
+        "Gungeon AP Item": 25,
     }
 
     marathon_location_count = {
@@ -80,8 +77,7 @@ class LocationGeneration:
         "Abbey Clears": 3,
         "Resourceful Rat Lair Clears": 2,
         "R&D Department Clears": 2,
-        "Chest AP Item": 25,
-        "Shop AP Item": 15
+        "Gungeon AP Item": 40,
     }
 
     @classmethod
@@ -114,13 +110,13 @@ class LocationGeneration:
     def get_ap_item_sub_count(cls, case_number=1):
         match case_number:
             case 0:
-                return 11, 5
+                return 16
             case 1:
-                return 16, 9
+                return 25
             case 2:
-                return 25, 15
+                return 40
 
-        return 16, 9
+        return 25
 
     @classmethod
     def get_location_count_list(cls, case_number=1):
@@ -134,26 +130,19 @@ class LocationGeneration:
 
         return LocationGeneration.standard_location_count
 
-def fill_ap_item_locations_to_max():
-    for i in range(0, 98):
-        location_table.update({f"Chest AP Item {i + 1}": LocationGeneration.location_id["Chest AP Item"] + i})
-        location_table.update({f"Shop AP Item {i + 1}": LocationGeneration.location_id["Shop AP Item"] + i})
-    return
 
 def fill_achievement_locations():
     name_list = LocationGeneration.location_id.keys()
 
     for name in name_list:
-        if name != "Chest AP Item" or name != "Shop AP Item":
-            for i in range(0, LocationGeneration.marathon_location_count[name]):
-                location_table.update({f"{name} {i + 1}": LocationGeneration.location_id[name] + i})
+        for i in range(0, LocationGeneration.marathon_location_count[name]):
+            location_table.update({f"{name} {i + 1}": LocationGeneration.location_id[name] + i})
 
     return
 
 
 location_table = {}
 
-fill_ap_item_locations_to_max()
 fill_achievement_locations()
 
 event_location_table = {

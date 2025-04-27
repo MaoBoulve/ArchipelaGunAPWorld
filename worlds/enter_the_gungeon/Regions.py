@@ -30,11 +30,11 @@ def fill_add_locations(amount: 10, item_case: 1):
 
     chest_fill = amount
 
-    last_chest, last_shop = LocationGeneration.get_ap_item_sub_count(case_number=item_case)
+    last_chest = LocationGeneration.get_ap_item_sub_count(case_number=item_case)
     loc_name_list = []
 
     for i in range(0, chest_fill):
-        loc_name = f"Chest AP Item {i + 1 + last_chest}"
+        loc_name = f"Gungeon AP Item {i + 1 + last_chest}"
         loc_name_list.append(loc_name)
 
     return loc_name_list
@@ -62,7 +62,7 @@ def create_regions(world: MultiWorld, options: GungeonOptions, player: int):
     name_list = LocationGeneration.location_id.keys()
 
     for name in name_list:
-        if name != "Chest AP Item" or name != "Shop AP Item":
+        if name != "Gungeon AP Item":
             for i in range(0, achievement_count_list[name]):
                 loc_name = f"{name} {i + 1}"
                 region.locations.append(GungeonLocation(player, loc_name, location_table[loc_name], region))
