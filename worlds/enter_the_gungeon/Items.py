@@ -155,12 +155,17 @@ paradox_character_unlock_table = {
     "Bullet Paradox": 8754405,
 }
 
+useful_item_table = {
+    "Reverse Curse Reversal": 8754500
+}
+
 item_table.update(gun_item_table)
 item_table.update(passive_item_table)
 item_table.update(pickup_item_table)
 item_table.update(trap_item_table)
 item_table.update(progression_item_table)
 item_table.update(paradox_character_unlock_table)
+item_table.update(useful_item_table)
 
 fill_item_table = {}
 fill_item_table.update(gun_item_table)

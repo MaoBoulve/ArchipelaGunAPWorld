@@ -65,6 +65,15 @@ class ParadoxMode(Choice):
     option_disabled = 0
     default = 1
 
+class ReverseCurseMode(Choice):
+    """Gain curse at the beginning of every run & add randomizer items to reduce curse.
+    Standard adds curse after 1 Past is cleared. Hard adds curse immediately"""
+    display_name = "Reverse Curse Mode"
+    option_disabled = 0
+    option_standard = 1
+    option_hard = 2
+    default = 1
+
 class GunItems(Choice):
     """Amount of Guns in your item pool"""
     display_name = "Gun Pool Items"
@@ -123,7 +132,8 @@ gungeon_option_groups = [
     OptionGroup("Randomizer Options", [
        DeathLink,
        ParadoxMode,
-       RandomizeEnemies
+       RandomizeEnemies,
+       ReverseCurseMode
     ]),
     OptionGroup("Gungeon Item Pool Options", [
        GunItems,
@@ -150,6 +160,7 @@ gungeon_options_presets: Dict[str, Dict[str, Any]] = {
     "paradox_mode": ParadoxMode.default,
     "random_enemies": RandomizeEnemies.default,
     "death_link": DeathLink.default,
+    "reverse_curse": ReverseCurseMode.default,
 
     "guns": GunItems.default,
     "passives": PassiveItems.default,
@@ -172,6 +183,7 @@ class GungeonOptions(PerGameCommonOptions):
     paradox_mode: ParadoxMode
     random_enemies: RandomizeEnemies
     death_link: DeathLink
+    reverse_curse: ReverseCurseMode
 
     guns: GunItems
     passives: PassiveItems

@@ -16,6 +16,9 @@ def get_gungeon_items_count(options: GungeonOptions):
         item_count += 6
     item_count += len(progression_item_table)
 
+    if options.reverse_curse.value != 0:
+        item_count += 8
+
     return item_count
 
 def get_user_requested_locations_count(options: GungeonOptions):

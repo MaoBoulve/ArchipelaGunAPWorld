@@ -63,6 +63,7 @@ class GungeonWorld(World):
             "Paradox": self.options.paradox_mode.value,
             "DeathLink": self.options.death_link.value,
             "RandomEnemies": self.options.random_enemies.value,
+            "ReverseCurse": self.options.reverse_curse.value,
 
             "AchievementChecks": self.options.achievement_locations.value,
             "APItemChecks": self.options.ap_item_locations.value,
@@ -110,26 +111,33 @@ class GungeonWorld(World):
         item_pool = self.create_item_pool(item_pool, amount_case=self.options.passives.value,
                                           item_table_list=passive_item_table)
 
-        "Progress items"
+        "Progress items =============================="
         for progression_item_name, itemID in progression_item_table.items():
             item_pool.append(self.create_progress_item(progression_item_name))
 
         consumables_count = Items.ItemPoolGeneration.get_consumables_count(self.options.consumable.value)
-        "Consumables items"
+        "Consumables items =============================="
         for i in range(0, consumables_count):
             item_pool.append(self.create_item(list(pickup_item_table)[i % len(pickup_item_table)]))
 
         trap_count = Items.ItemPoolGeneration.get_consumables_count(self.options.traps.value)
-        "Traps"
+        "Traps =============================="
         for i in range(0, trap_count):
             item_pool.append(self.create_trap_item(list(trap_item_table)[i % len(trap_item_table)]))
 
-        "Paradox Mode"
+        "Paradox Mode =============================="
         if self.options.paradox_mode.value == 1:
             name_list = paradox_character_unlock_table.keys()
 
             for character_name in name_list:
                 item_pool.append(self.create_progress_item(character_name))
+
+        "Reverse Curse =============================="
+        if self.options.reverse_curse.value != 0:
+            for i in range(0, 8):
+                item_pool.append(self.create_useful_item("Reverse Curse Reversal"))
+
+        "Check for fill =============================="
 
         item_count = get_gungeon_items_count(self.options)
         location_count = get_user_requested_locations_count(self.options)
