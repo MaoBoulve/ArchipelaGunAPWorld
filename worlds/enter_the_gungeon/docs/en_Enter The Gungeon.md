@@ -10,10 +10,10 @@ All chest items replaced with APItem location checks. Milestones for goals like 
 Items received in Gungeon are randomized by rarity.
 
 ## What is the goal of Enter The Gungeon when randomized?
-To defeat The Lich or High Dragun depending on goals set, as well as any additional side bosses you may select.
+To defeat all Enter the Gungeon bosses marked in options. These can include: Lich, Dragun, Character Pasts, secret chamber bosses.
 
 ## Which items can be in another player's world?
-All items including progress items by default.
+Gungeon items randomized in rarity tiers, Character unlocks for Paradox Mode, Curse lowering for Reverse Curse Mode
 
 ## What does another world's item look like in Enter The Gungeon?
 APItem in chests & messages through client. WIP for in-engine messages.
