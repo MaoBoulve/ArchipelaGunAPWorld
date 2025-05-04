@@ -6,12 +6,11 @@
 # A. The options in this file are weighted. This means the higher number you assign to a value, the
 #    more chances you have for that option to be chosen. For example, an option like this:
 #
-#    map_shuffle:
-#      on: 5
-#      off: 15
+#    dragun:
+#      required: 5
+#      optional: 15
 #
-#    Means you have 5 chances for map shuffle to occur, and 15 chances for map shuffle to be turned
-#    off.
+#    Means you have 5 chances for Dragun to be required, and 15 chances for map shuffle to be skippable
 #
 # Q. I've never seen a file like this before. What characters am I allowed to use?
 # A. This is a .yaml file. You are allowed to use most characters.
@@ -110,6 +109,13 @@ Enter The Gungeon:
     # When you die, everyone who enabled death link dies. Of course, the reverse is true too.
     'false': 0
     'true': 50
+
+  reverse_curse:
+    # Gain curse at the beginning of every run & add randomizer items to reduce curse.
+    # Standard adds curse after 1 Past is cleared. Hard adds curse immediately
+    disabled: 0
+    standard: 50
+    hard: 0
 
   # Gungeon Item Pool Options
   guns:

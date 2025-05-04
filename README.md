@@ -14,7 +14,7 @@ Revision AP World for Enter the Gungeon. Based on the prior work by KinTheInfini
 2. Use Thunderstore to install the Archipelago mod & dependency mods
    1. ArchipelaGun Mod (https://thunderstore.io/c/enter-the-gungeon/p/MaoBoulve/ArchipelaGun_Multiworld_Randomizer/)
    2. Mod the Gungeon v1.8.4 (https://thunderstore.io/c/enter-the-gungeon/p/MtG_API/Mod_the_Gungeon_API/)
-   3. Alexandria v0.4.9 (https://thunderstore.io/c/enter-the-gungeon/p/Alexandria/Alexandria/)
+   3. Alexandria v0.4.18 (https://thunderstore.io/c/enter-the-gungeon/p/Alexandria/Alexandria/)
 3. Start The Game Modded
 
 # Joining a MultiWorld Game
@@ -25,7 +25,7 @@ Revision AP World for Enter the Gungeon. Based on the prior work by KinTheInfini
  * connect (ip) (port) (slot name) --- [Connect to room. Space separated, without the parenthesis]
  * retrieve --- [Retrieve items from server, once per run ]
  * progress --- [Print out goals and current state of game completion]
- * apspawn --- [Debug spawn command  to spawn the next APItem]
+ * debugtool --- [General debug command]
  
  * fullconnect (ip) (port) --- [Workaround connection option for handling player names with spaces & rooms with passwords. Use with 'set'.]
  * set (option) --- [Replace 'option' with Name or Password. Set parameters for 'fullconnect']
