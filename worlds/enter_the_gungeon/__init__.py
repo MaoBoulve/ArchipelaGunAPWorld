@@ -68,6 +68,7 @@ class GungeonWorld(World):
             "AchievementChecks": self.options.achievement_locations.value,
             "APItemChecks": self.options.ap_item_locations.value,
             "ExtraLocations": self.count_extra_locations()
+            "APWorld": "0.2.0"
         }
 
     def count_extra_locations(self):
